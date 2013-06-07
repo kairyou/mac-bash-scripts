@@ -5,12 +5,9 @@
 
 MYSQL="/usr/local/bin/mysql.server"
 NGINX="/usr/local/bin/nginx"
-# "/usr/local/opt/php54/sbin/php-fpm" "/usr/sbin/php-fpm"
-PHPFPM="/usr/local/opt/php54/sbin/php-fpm"
+PHPFPM="/usr/local/opt/php54/sbin/php-fpm" # sys default: "/usr/sbin/php-fpm"
 # PIDPATH="/usr/local/var/run"
 param=$1
-
-# sudo chown -R $(whoami) /usr/local/var/mysql/
 
 start()
 {
@@ -28,11 +25,16 @@ start()
  
 stop()
 {
-    echo "stopping mnmp ..."
-    killall -c php-fpm
-    sudo $NGINX -s stop
-    $MYSQL stop
-    # killall -c mysqld
+    npids=`ps aux | grep -i nginx | grep -v grep | awk '{print $2}'`
+    if [ ! -n "$npids" ]; then
+        echo "already stopped"
+    else
+        echo "stopping mnmp ..."
+        killall -c php-fpm
+        sudo $NGINX -s stop
+        $MYSQL stop
+        # killall -c mysqld
+    fi
 }
 
 case $param in
