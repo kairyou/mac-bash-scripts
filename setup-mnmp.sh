@@ -9,8 +9,8 @@ brew tap homebrew/dupes
 brew install pcre
 brew install nginx
 
-# brew options php54 # see more options
 brew install php54 --with-imap --with-tidy --with-debug --with-pgsql --with-mysql --with-fpm
+# brew options php54 # see more options
 brew install php54-mcrypt
 
 # echo 'export PATH="$(brew --prefix php54)/bin:$PATH" # php' >> ~/.bash_profile
