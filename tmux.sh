@@ -3,8 +3,6 @@
 # Reference:
 # goo.gl/oZS5dH
 
-# scp -r -C -P 36000 /Users/leon/leon/bash/tmux.sh leon@staging.fever38.com:/home/leon/
-
 # configs
 backup_dir=~/.bak/tmux_snapshot
 export PATH="${PATH}:/usr/local/bin"
@@ -17,7 +15,7 @@ fi
 
 # usage
 usage() {
-  echo "usage: ${0} -b | -r | -rm [session_name]"; exit
+  echo "usage: ${0} -b | -r | -rm | -l [session_name]"; exit
 }
 
 # backup
@@ -180,6 +178,13 @@ restore() {
   done
 }
 
+list() {
+  session_names=`tmux list-sessions | awk -F: '{print $1}'`;
+  echo 'sessions:' $session_names
+  backup_names=`ls $backup_dir | grep -v '\.size$' | cut -d: -f1 | sort -du`
+  echo 'backups:' $backup_names
+
+}
 remove() {
   if [ ! $target ]; then
     usage;exit;
@@ -198,6 +203,8 @@ case $task in
     backup;;
   '-r') 
     restore;;
+  '-l') 
+    list;;
   '-rm')
     remove;;
   *)
