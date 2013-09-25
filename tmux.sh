@@ -3,7 +3,6 @@
 # Reference:
 # goo.gl/oZS5dH
 
-# scp -r -C -P 36000 /Users/leon/leon/bash/tmux.sh leon@staging.fever38.com:/home/leon/
 
 # configs
 backup_dir=~/.bak/tmux_snapshot
