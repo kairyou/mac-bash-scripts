@@ -14,6 +14,8 @@ start()
     npids=`ps aux | grep -i nginx | grep -v grep | awk '{print $2}'`
     if [ ! -n "$npids" ]; then
         echo "starting php-fpm ..."
+        # unable to bind listening socket for address '127.0.0.1:xx': Address already in use
+        # $ killall -c php-fpm
         $PHPFPM
         echo "starting nginx ..."
         sudo $NGINX
