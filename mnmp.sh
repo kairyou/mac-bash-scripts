@@ -5,9 +5,10 @@
 
 MYSQL="/usr/local/bin/mysql.server"
 NGINX="/usr/local/bin/nginx"
-PHPFPM="/usr/local/opt/php54/sbin/php-fpm" # sys default: "/usr/sbin/php-fpm"
+PHPFPM="/usr/local/opt/php56/sbin/php-fpm" # sys default: "/usr/sbin/php-fpm"
 # PIDPATH="/usr/local/var/run"
 param=$1
+type=$2
 
 start()
 {
@@ -38,7 +39,10 @@ stop()
         # killall -c mysqld
     fi
 }
-
+# config()
+    # nginx -V # /usr/local/etc/nginx/nginx.conf
+    # mysql –verbose –help | grep -A 1 'Default options' # /usr/local/opt/mysql/my.cnf
+    # /usr/local/opt/php56/sbin/php-fpm -i | grep 'Loaded Configuration File' # /usr/local/etc/php/5.6/php.ini, /usr/local/etc/php/5.6/php-fpm.conf
 case $param in
     'start')
         start;;
