@@ -17,7 +17,7 @@ start()
         echo "starting php-fpm ..." && $PHPFPM start
         # unable to bind listening socket for address '127.0.0.1:xx': Address already in use # killall -c php-fpm
 
-        echo "starting nginx ..." && $NGINX
+        echo "starting nginx ..." && sudo $NGINX # sudo for bind to 0.0.0.0:80
         $MYSQL start
     else
         echo "already running"
@@ -26,15 +26,16 @@ start()
  
 stop()
 {
-    npids=`ps aux | grep -i nginx | grep -v grep | awk '{print $2}'`
-    if [ ! -n "$npids" ]; then
-        echo "already stopped"
-    else
-        echo "stopping mnmp ..."
-        $PHPFPM stop # killall -c php-fpm
-        $NGINX -s stop
-        $MYSQL stop # killall -c mysqld
-    fi
+    # npids=`ps aux | grep -i nginx | grep -v grep | awk '{print $2}'`
+    # if [ ! -n "$npids" ]; then
+    #     echo "already stopped";exit;
+    # fi
+
+    echo "stopping mnmp ..."
+    $PHPFPM stop # killall -c php-fpm
+    sudo $NGINX -s stop
+    $MYSQL stop # killall -c mysqld
+
 }
 # config()
     # nginx -V # /usr/local/etc/nginx/nginx.conf

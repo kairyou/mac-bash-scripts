@@ -19,6 +19,7 @@ brew install php56-mcrypt
 
 # brew uninstall imagemagick && brew install --fresh imagemagick
 brew install php56-imagick --build-from-source
+# brew install php56-redis --with-igbinary --build-from-source
 
 brew install mysql
 # set up mysql to run as user account
