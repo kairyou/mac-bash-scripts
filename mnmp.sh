@@ -5,7 +5,7 @@
 
 MYSQL="/usr/local/bin/mysql.server"
 NGINX="/usr/local/bin/nginx"
-PHPFPM="/usr/local/opt/php56/sbin/php-fpm" # sys default: "/usr/sbin/php-fpm"
+PHPFPM="/usr/local/opt/php56/sbin/php56-fpm" # sys default: "/usr/sbin/php-fpm"
 # PIDPATH="/usr/local/var/run"
 param=$1
 type=$2
@@ -14,12 +14,10 @@ start()
 {
     npids=`ps aux | grep -i nginx | grep -v grep | awk '{print $2}'`
     if [ ! -n "$npids" ]; then
-        echo "starting php-fpm ..."
-        # unable to bind listening socket for address '127.0.0.1:xx': Address already in use
-        # $ killall -c php-fpm
-        $PHPFPM
-        echo "starting nginx ..."
-        sudo $NGINX
+        echo "starting php-fpm ..." && $PHPFPM start
+        # unable to bind listening socket for address '127.0.0.1:xx': Address already in use # killall -c php-fpm
+
+        echo "starting nginx ..." && $NGINX
         $MYSQL start
     else
         echo "already running"
@@ -33,10 +31,9 @@ stop()
         echo "already stopped"
     else
         echo "stopping mnmp ..."
-        killall -c php-fpm
-        sudo $NGINX -s stop
-        $MYSQL stop
-        # killall -c mysqld
+        $PHPFPM stop # killall -c php-fpm
+        $NGINX -s stop
+        $MYSQL stop # killall -c mysqld
     fi
 }
 # config()

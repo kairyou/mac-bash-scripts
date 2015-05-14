@@ -27,7 +27,7 @@ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --
 
 # echo 'export PATH="$(brew --prefix php56)/bin:$PATH" # php' >> ~/.zshrc
 
-mkdir -p /usr/local/etc/nginx/servers/ #vhost
+mkdir -p /usr/local/etc/nginx/vhost/ #vhost
 # sudo chown -R $(whoami) /usr/local/var/mysql/
 
 # echo "alias mnmp='$CWD/mnmp.sh'" >> ~/.zshrc
@@ -39,8 +39,12 @@ else # -n "$BASH_VERSION"
 fi
 
 # TODO:
-# vim /usr/local/etc/php/5.6/php.ini; # set a specific date.timezone value, (e.g., change ";date.timezone =" to "date.timezone = America/Chicago" or "date.timezone = Asia/Shanghai")
-# run: /usr/local/opt/php56/sbin/php-fpm -i | grep 'Loaded Configuration File'
+# 1. vim /usr/local/etc/php/5.6/php.ini; # set a specific date.timezone value, (e.g., change ";date.timezone =" to "date.timezone = America/Chicago" or "date.timezone = Asia/Shanghai")
+# run: /usr/local/opt/php56/sbin/php-fpm -i | grep 'Loaded Configuration File' # for test
+# 2. vim /usr/local/etc/php/5.6/php-fpm.conf
+# change : error_log = /tmp/php-fpm.log, and comment out the following lines:
+# ;user = _www;
+# ;group = _www
 
 # FAQ:
 # Library not loaded: /usr/local/lib/libmcrypt.4.4.8.dylib
