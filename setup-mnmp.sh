@@ -11,9 +11,11 @@ brew tap homebrew/dupes
 brew install pcre
 brew install nginx
 
-# brew options php56 # see more options
-brew install php56 --with-debug --with-imap --with-mysql --with-fpm --with-postgresql --without-apache #--with-pdo-oci
+# brew tap raggi/ale && brew install openssl-osx-ca # or: echo insecure >> ~/.curlrc
 
+# fix curl https (nginx 502)
+# brew options php56 # see more options
+brew install php56 --with-debug --with-imap --with-mysql --with-fpm --with-postgresql --without-apache --with-homebrew-openssl --with-homebrew-curl #--with-pdo-oci
 # brew search php56-
 brew install php56-mcrypt
 
