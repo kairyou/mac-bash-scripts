@@ -15,13 +15,20 @@ brew install nginx
 
 # fix curl https (nginx 502)
 # brew options php56 # see more options
-brew install php56 --with-debug --with-imap --with-mysql --with-fpm --with-postgresql --without-apache --with-homebrew-openssl --with-homebrew-curl #--with-pdo-oci
+brew install php56 --with-imap --with-mysql --with-fpm --with-postgresql --without-apache --with-homebrew-openssl --with-homebrew-curl #--with-pdo-oci
 # brew search php56-
-brew install php56-mcrypt
-
 # brew uninstall imagemagick && brew install --fresh imagemagick
 brew install php56-imagick --build-from-source
-# brew install php56-redis --with-igbinary --build-from-source
+brew install php56-igbinary
+brew install php56-redis #--with-igbinary --build-from-source
+brew install php56-mcrypt
+brew install php56-memcached
+brew install php56-memcache
+# brew install php56-tidy
+# brew install php56-xdebug
+
+# brew reinstall php56-{xx} --build-from-source
+
 
 brew install mysql
 # set up mysql to run as user account
